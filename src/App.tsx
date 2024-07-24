@@ -1,9 +1,18 @@
 import { useState } from "react";
 import { Movie } from "./models/movies";
+import { moviesData } from "./database/moviesdata";
+import { MovieComponent } from "./components/MovieComponent";
 function App() {
   let foodList:string[] = ['rice', 'pizza', 'double cheese burger','sushi'];
   const [food, setFood] = useState(foodList);
   const [meal, setMeal] = useState('');
+  const [movies, setMovies] = useState<Movie[]>(moviesData);
+  const [movie, setMovie] = useState<Movie>({
+    id: 0,
+    title: '',
+    director: '',
+    year: 0
+  });
   const addFood = (meal:string) => {
     setFood([meal, ...food]);
     setMeal('');
@@ -14,11 +23,11 @@ function App() {
   } 
    return (
     <>
-     
+      <h1>My Favourite Movies ( ´･･)ﾉ(._.`)</h1>
       <ul>
         {
-          food.map((meal) => {
-            return <li key={meal}>{meal.toUpperCase()}</li>
+          movies.map((movie) => {
+            return <MovieComponent key={movie.id} movie={movie}/>
           })
         }
       </ul>
