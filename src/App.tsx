@@ -3,9 +3,7 @@ import { Movie } from "./models/movies";
 import { moviesData } from "./database/moviesdata";
 import { MovieComponent } from "./components/MovieComponent";
 function App() {
-  let foodList:string[] = ['rice', 'pizza', 'double cheese burger','sushi'];
-  const [food, setFood] = useState(foodList);
-  const [meal, setMeal] = useState('');
+  
   const [movies, setMovies] = useState<Movie[]>(moviesData);
   const [movie, setMovie] = useState<Movie>({
     id: 0,
@@ -13,14 +11,8 @@ function App() {
     director: '',
     year: 0
   });
-  const addFood = (meal:string) => {
-    setFood([meal, ...food]);
-    setMeal('');
-  };
-  const changeMeal = 
-  (e:React.ChangeEvent<HTMLInputElement>) => {
-    setMeal(e.target.value);
-  } 
+  const {title, director, year} = movie;
+  
    return (
     <>
       <h1>My Favourite Movies ( ´･･)ﾉ(._.`)</h1>
@@ -33,9 +25,21 @@ function App() {
       </ul>
       
       <input type="text" 
-      placeholder="Enter your favourite food" 
-      onChange={changeMeal} value={meal}/>
-      <button onClick={()=>addFood(meal)}>Add</button>
+      placeholder="Enter director" 
+       value={director}
+       id="director"
+       name="director"/>
+      <input type="text"
+      placeholder="Enter title"
+       value={title}
+       id="title"
+       name="title"/>
+      <input type="number" 
+      name="year"
+      id="year"
+      placeholder="enter year"  
+      value={year}/>
+      <button >Add</button>
       <h2>I dont know</h2>
     </>
   )
