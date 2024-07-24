@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Movie } from "./models/movies";
 import { moviesData } from "./database/moviesdata";
 import { MovieComponent } from "./components/MovieComponent";
+import { Button } from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   
   const [movies, setMovies] = useState<Movie[]>(moviesData);
@@ -21,7 +23,7 @@ function App() {
   const addMovie = () => {
     setMovie({
       ...movie,
-      id: movies.length + 1
+      id: movies.length + 2
     });
     setMovies([...movies, movie]);
     /*setMovie({
@@ -34,13 +36,15 @@ function App() {
    return (
     <>
       <h1>My Favourite Movies ( ´･･)ﾉ(._.`)</h1>
-      <ul>
+      <div className="container">
+        <div className="row">
         {
           movies.map((movie) => {
-            return <MovieComponent key={movie.id} movie={movie}/>
+            return <MovieComponent key={movie.id} movie={movie} />
           })
         }
-      </ul>
+        </div>
+      </div>
       
       <input type="text" 
       placeholder="Enter director" 
@@ -59,8 +63,10 @@ function App() {
       id="year"
       placeholder="enter year"  
       value={year}
-      onChange={handleChange}/>
-      <button onClick={addMovie}>Add</button>
+      onChange={handleChange}
+      className="input"/>
+      <Button onClick={addMovie} className="button button-primary">Add</Button>
+      <button className="btn btn-success">Click Me</button>
       <h2>I dont know</h2>
     </>
   )
